@@ -21,7 +21,7 @@
       </q-card-section>
     </q-card>
 
-    <q-card>
+    <q-card class="q-mb-md">
       <q-card-section>
         <div class="text-h6">Docker Concepts (สรุปสั้น ๆ)</div>
         <q-list bordered separator class="q-mt-sm">
@@ -29,6 +29,25 @@
             <q-item-section>
               <q-item-label>{{ item.title }}</q-item-label>
               <q-item-label caption>{{ item.detail }}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-card-section>
+    </q-card>
+
+    <q-card>
+      <q-card-section>
+        <div class="text-h6">Docker Quick Reference</div>
+        <q-list bordered separator class="q-mt-sm">
+          <q-item v-for="(cmd, index) in dockerQuickRef" :key="index">
+            <q-item-section avatar>
+              <q-badge color="primary">{{ index + 1 }}</q-badge>
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>
+                <code>{{ cmd.command }}</code>
+              </q-item-label>
+              <q-item-label caption>{{ cmd.usage }}</q-item-label>
             </q-item-section>
           </q-item>
         </q-list>
@@ -77,6 +96,29 @@ const dockerItems = [
   {
     title: 'Network',
     detail: 'ให้บริการใน Docker ติดต่อกันได้ เช่น Nginx ส่งต่อคำขอไปยัง Express',
+  },
+]
+
+const dockerQuickRef = [
+  {
+    command: 'docker build -t quasar-frontend .',
+    usage: 'ใช้เมื่อต้องการสร้าง Docker image ใหม่จาก Dockerfile ในโฟลเดอร์ปัจจุบัน',
+  },
+  {
+    command: 'docker ps',
+    usage: 'ใช้เมื่อต้องการดูรายการ container ที่กำลังรันอยู่ สถานะ และพอร์ตที่เปิดใช้งาน',
+  },
+  {
+    command: 'docker compose up -d --build',
+    usage: 'ใช้เมื่อต้องการ build image ใหม่และสตาร์ต service ทั้งหมดตาม docker-compose.yml แบบเบื้องหลัง',
+  },
+  {
+    command: 'docker compose logs frontend',
+    usage: 'ใช้เมื่อต้องการดู log ของ service frontend เพื่อตรวจสอบการทำงานหรือดีบักปัญหา',
+  },
+  {
+    command: 'docker compose down',
+    usage: 'ใช้เมื่อต้องการหยุดและลบ container รวมถึง network ที่สร้างจาก Docker Compose เมื่อใช้งานเสร็จ',
   },
 ]
 </script>
